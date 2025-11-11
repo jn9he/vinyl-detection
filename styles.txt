@@ -1,0 +1,761 @@
+Style
+923,524Pop Rock
+698,814House
+630,078Vocal
+618,518Experimental
+571,580Punk
+536,409Alternative Rock
+523,744Synth-pop
+481,881Techno
+445,738Indie Rock
+437,197Soul
+436,882Ambient
+427,988Disco
+414,987Hardcore
+412,613Folk
+381,109Hard Rock
+380,900Ballad
+373,816Country
+334,531Electro
+326,252Rock & Roll
+302,068Chanson
+298,259Romantic
+295,693Heavy Metal
+285,713Psychedelic Rock
+283,943Trance
+270,921Folk Rock
+269,204Soundtrack
+259,650Downtempo
+256,824Noise
+248,919Prog Rock
+245,927Classic Rock
+237,810Schlager
+234,313Funk
+227,086Easy Listening
+222,760Black Metal
+213,924Tech House
+210,663Blues Rock
+199,389New Wave
+195,957Rhythm & Blues
+194,826Deep House
+193,598Classical
+193,434Industrial
+191,053Death Metal
+183,138Progressive House
+174,923Drum n Bass
+172,782Soft Rock
+169,689Euro House
+158,707Abstract
+156,083Garage Rock
+152,627Gospel
+141,921Europop
+137,656Minimal
+135,858Acoustic
+134,625Thrash
+134,324Baroque
+131,858Modern
+126,296Swing
+122,759Big Band
+120,360Indie Pop
+116,959Country Rock
+113,988Contemporary Jazz
+112,679Dub
+112,615Drone
+109,956Breakbeat
+103,999Opera
+101,250Holiday
+100,775Progressive Trance
+98,676Contemporary
+94,452Contemporary R&B
+93,856IDM
+93,592African
+93,120Dancehall
+90,162Breaks
+89,707Art Rock
+87,453Fusion
+87,221Dark Ambient
+86,657Dance-pop
+86,271Post-Punk
+85,607Gangsta
+85,332Reggae
+84,193Religious
+82,806Pop Rap
+82,547Doom Metal
+79,439Avantgarde
+78,740Electro House
+77,121Beat
+76,793RnB/Swing
+74,390Score
+74,356Instrumental
+73,576Jazz-Funk
+73,425Rockabilly
+72,803Lo-Fi
+72,485Comedy
+72,475Hard Trance
+71,667Theme
+71,510Acid
+70,066Roots Reggae
+68,581Grindcore
+66,131Leftfield
+66,071Spoken Word
+65,582Ska
+65,293Glam
+65,125Bolero
+64,764Soul-Jazz
+64,539Post Rock
+64,298Dubstep
+64,017Psy-Trance
+63,294Power Pop
+62,416Salsa
+62,208New Age
+61,537Bop
+61,060Hip Hop
+60,615Conscious
+60,340Goth Rock
+60,000Modern Classical
+58,885Jazz-Rock
+58,872Cumbia
+56,389Free Improvisation
+56,162Hard House
+56,125Emo
+54,676J-pop
+54,220Choral
+54,153Musical
+52,893Trip Hop
+52,426Latin Jazz
+51,501Volksmusik
+51,016Stoner Rock
+49,121Hard Bop
+48,889EBM
+48,813Italo-Disco
+48,751Shoegaze
+48,670MPB
+48,040Hardstyle
+47,262Field Recording
+47,146Pop Punk
+47,067Surf
+46,538Trap
+46,301Story
+46,265Free Jazz
+46,146Synthwave
+46,078Tango
+45,715Doo Wop
+45,532Jungle
+44,535Samba
+44,088Cool Jazz
+43,632Darkwave
+43,517Celtic
+43,459Post Bop
+43,406Radioplay
+42,911Oi
+42,719Garage House
+42,572Metalcore
+42,218Bluegrass
+41,973Vaporwave
+41,844Eurodance
+41,004Laïkó
+40,737Happy Hardcore
+40,179UK Garage
+40,028Polka
+39,744Smooth Jazz
+39,576Grunge
+39,503Hardcore Hip-Hop
+38,287Tribal
+38,036Novelty
+37,950Progressive Metal
+37,672Flamenco
+36,793AOR
+36,541Arena Rock
+36,521Kayōkyoku
+36,177Nu Metal
+35,177Italodance
+34,720Dixieland
+34,651Symphonic Rock
+34,618Southern Rock
+33,735Boom Bap
+32,973Hindustani
+32,717Harsh Noise Wall
+32,144Latin
+31,835Rumba
+31,707Parody
+31,004Glitch
+30,633Future Jazz
+30,379Audiobook
+30,361Power Metal
+29,749Cha-Cha
+29,189Merengue
+28,900Space Rock
+28,884Bossa Nova
+28,569Krautrock
+28,293Dub Techno
+28,158Speed Metal
+27,963Ranchera
+27,795Post-Hardcore
+27,491Breakcore
+27,461Gabber
+27,221Neo-Classical
+27,016Jazzy Hip-Hop
+26,740Poetry
+26,380Hi NRG
+26,277Avant-garde Jazz
+26,271Reggae-Pop
+25,902Power Electronics
+25,784Bollywood
+25,564Minimal Techno
+25,129Acid House
+24,845Marches
+24,537Dungeon Synth
+24,385Boogie
+24,277Renaissance
+24,110Musique Concrète
+23,843Electric Blues
+23,246Sludge Metal
+23,130Nu-Disco
+22,579Mambo
+22,557Mod
+22,324Chiptune
+22,113Interview
+22,066Bossanova
+21,788Country Blues
+21,641Bass Music
+21,441Acid Jazz
+21,249Thug Rap
+21,223Freestyle
+20,983Big Beat
+20,930Indian Classical
+20,912Modal
+20,555Light Music
+20,355Tribal House
+20,288Math Rock
+20,249Education
+20,010Berlin-School
+19,568Chicago Blues
+19,518Calypso
+19,340Psychedelic
+19,180Orchestra
+19,083Impressionist
+18,843Neo Soul
+18,794Broken Beat
+18,774Ethereal
+18,588Neofolk
+18,234Rocksteady
+18,167Crust
+17,917Afrobeat
+17,811Britpop
+17,789Operetta
+17,715Afro-Cuban
+17,672Guaracha
+17,528Lounge
+17,453Mandopop
+17,414Goregrind
+17,352Chillwave
+17,278Video Game Music
+16,876G-Funk
+16,615Grime
+16,558Melodic Death Metal
+16,305Euro-Disco
+16,239Éntekhno
+16,237Deep Techno
+16,155Ragtime
+16,136Gothic Metal
+16,117Hip-House
+16,089Canzone Napoletana
+15,745Brass Band
+15,312Goa Trance
+15,290Nursery Rhymes
+15,209Dream Pop
+15,123Lovers Rock
+15,093Symphonic Metal
+14,902Hard Techno
+14,886Dialogue
+14,694Psychobilly
+14,517Rhythmic Noise
+14,390Organ
+14,380Neo-Romantic
+14,141Cut-up/DJ
+14,080Son
+14,061Medieval
+13,935Promotional
+13,927Tech Trance
+13,770K-pop
+13,592Atmospheric Black Metal
+13,374Pacific
+13,252Speedcore
+13,202Nordic
+13,058Twist
+12,943New Jack Swing
+12,882Military
+12,796Educational
+12,787Ragga
+12,781Guaguancó
+12,724Eurobeat
+12,549Ragga HipHop
+12,530Honky Tonk
+12,491Funk Metal
+12,487Melodic Hardcore
+12,470Deathcore
+12,448Space-Age
+12,312Mariachi
+12,207Fado
+12,140City Pop
+12,106Political
+12,095Hands Up
+11,964Sound Collage
+11,475J-Rock
+11,456Acid Rock
+11,416Music Hall
+11,336Hawaiian
+11,310Highlife
+11,288Reggaeton
+11,243Romani
+11,075Noisecore
+10,967Folk Metal
+10,939Symphony
+10,909Soukous
+10,744Witch House
+10,717Soca
+10,579Speech
+10,503Anison
+10,498Horrorcore
+10,497Concerto
+10,351Afro-Cuban Jazz
+10,311Makina
+10,223Zouk
+10,172Monolog
+10,131Post-Metal
+9,846Freetekno
+9,763Piano Blues
+9,705Jazzdance
+9,594Public Broadcast
+9,513Delta Blues
+9,321Luk Thung
+9,211Vallenato
+9,090Modern Electric Blues
+9,056Norteño
+9,005Alt-Pop
+8,935Electroacoustic
+8,790Coldwave
+8,771Bubblegum
+8,710Cubano
+8,528Alternative Metal
+8,249Forró
+8,155Enka
+8,077New Beat
+8,068Corrido
+8,000Oratorio
+7,891Sound Art
+7,714Therapy
+7,704Bhangra
+7,681Gypsy Jazz
+7,585Italo House
+7,483No Wave
+7,377Noise Rock
+7,358Viking Metal
+7,250Porro
+7,248Harmonica Blues
+7,237Special Effects
+7,203Jumpstyle
+7,149Texas Blues
+7,101Andean Music
+7,092Industrial Metal
+7,025Cloud Rap
+6,996Cajun
+6,995Karaoke
+6,973Boogaloo
+6,903Pub Rock
+6,895Speed Garage
+6,768Tejano
+6,733Post-Modern
+6,564Yé-Yé
+6,410P.Funk
+6,389Hillbilly
+6,308Groove Metal
+6,192Depressive Black Metal
+6,147Chamber Music
+6,099Power Violence
+6,080Bassline
+6,075Jump Blues
+6,054Pachanga
+5,934Piano
+5,858Illbient
+5,821Chinese Classical
+5,792Technical Death Metal
+5,731Donk
+5,716Rebetiko
+5,696Cantopop
+5,663Raï
+5,627Screw
+5,572Descarga
+5,555Russian Pop
+5,542Guajira
+5,488Boogie Woogie
+5,436Beguine
+5,434Dansband
+5,432Sonata
+5,278Louisiana Blues
+5,261Séga
+5,259Latin Pop
+5,249Son Montuno
+5,229Min'yō
+5,157Concert Film
+5,085Deathrock
+5,008Nueva Cancion
+4,876Western Swing
+4,868Jangle Pop
+4,838Charanga
+4,811Sermon
+4,802Levenslied
+4,779Carnatic
+4,724Copla
+4,715Crunk
+4,711Juke
+4,644Hokkien Pop
+4,628Klezmer
+4,623Horror Rock
+4,492Aboriginal
+4,345Pasodoble
+4,324Technical
+4,259Cantata
+4,126Catalan Music
+4,112Compas
+4,099Ethno-pop
+3,943Electroclash
+3,886Keyboard
+3,883Bachata
+3,878Disco Polo
+3,854Appalachian Music
+3,835DJ Battle Tool
+3,827Tropical House
+3,816Health-Fitness
+3,760Huayno
+3,744Música Criolla
+3,707Conjunto
+3,640Ghetto
+3,622Danzon
+3,574Minneapolis Sound
+3,544Progressive Breaks
+3,491String Instrument
+3,455Népzene
+3,444Funeral Doom Metal
+3,430Late Romantic
+3,424Turntablism
+3,404Pornogrind
+3,383Musette
+3,348Halftime
+3,344Sea Shanties
+3,282Dark Electro
+3,273Batucada
+3,237Indo-Pop
+3,234Swingbeat
+3,223Bounce
+3,215Bayou Funk
+3,212Footwork
+3,195Zydeco
+3,150Free Funk
+3,145Balearic
+3,058Quechua
+3,028String Ensemble
+3,019Music Video
+2,987Ballet
+2,946Early
+2,926Glitch Hop
+2,892Bakersfield Sound
+2,841J-Core
+2,825Cretan
+2,793Sound Poetry
+2,778Liscio
+2,762Baião
+2,739Lambada
+2,701Suite
+2,615Swamp Pop
+2,608Plena
+2,594Plunderphonics
+2,581Steel Band
+2,579Choro
+2,571Axé
+2,568Schranz
+2,557Movie Effects
+2,521Hyperpop
+2,467Go-Go
+2,454Skiffle
+2,449Doomcore
+2,426Ghazal
+2,409Solo
+2,390Pipe & Drum
+2,376Cabaret
+2,368Kwaito
+2,357Ghetto House
+2,353Miami Bass
+2,344Sertanejo
+2,295Chamamé
+2,294Mizrahi
+2,291Gamelan
+2,274Mass
+2,273Ryūkōka
+2,260Zamba
+2,241Mo Lam
+2,237Erotic
+2,234Bleep
+2,218Zarzuela
+2,171Samba-Canção
+2,147Persian Classical
+2,138Kolo
+2,071Nueva Trova
+2,047Trova
+2,027Bengali Music
+2,023Ottoman Classical
+2,004Future House
+1,998Chacarera
+1,997Crossover thrash
+1,971Baroque Pop
+1,959Basque Music
+1,947Spirituals
+1,946Phonk
+1,919Gaita
+1,907Public Service Announcement
+1,902Blackgaze
+1,879Barbershop
+1,877NDW
+1,874Unblack Metal
+1,852Dangdut
+1,828Exotica
+1,801Shidaiqu
+1,800Rock Opera
+1,748Luk Krung
+1,744Future Bass
+1,708Drill
+1,694Chutney
+1,678Group Sounds
+1,672UK Street Soul
+1,669Britcore
+1,660Tamil Film Music
+1,647Neo Trance
+1,601K-Rock
+1,587Tone Poem
+1,583Joropo
+1,581Memphis Blues
+1,569Favela Funk
+1,568Sunshine Pop
+1,558Qawwali
+1,555Ghettotech
+1,551Beatdown
+1,549Nhạc Vàng
+1,542Passion
+1,542Theme With Variations
+1,525Occitan
+1,501Slowcore
+1,493Twelve-tone
+1,486Reggae Gospel
+1,460East Coast Blues
+1,441Bomba
+1,432Banda
+1,431Ambient House
+1,423Marimba
+1,396Overture
+1,377Gusle
+1,359Keroncong
+1,359Villancicos
+1,337Andalusian Classical
+1,325Caipira
+1,314Hyphy
+1,290Serenade
+1,282Izvorna
+1,276Timba
+1,274Guarania
+1,257Kaseko
+1,242Dark Jazz
+1,241Mathcore
+1,235Milonga
+1,230Dub Poetry
+1,225UK Funky
+1,203Harpsichord
+1,187Hiplife
+1,165Jibaro
+1,155Morna
+1,144Art Song
+1,139Screamo
+1,136Maloya
+1,135French House
+1,120Piedmont Blues
+1,117Baltimore Club
+1,113Medical
+1,099Vocaloid
+1,077Cape Jazz
+1,066Deconstructed Club
+1,060Marcha Carnavalesca
+1,059Electro Swing
+1,057Vaudeville
+1,053Jota
+1,052Post-Grunge
+1,032Brutal Death Metal
+1,032Overtone Singing
+1,018Sephardic
+1,007Motet
+1,007Salegy
+991Mento
+977Galician Traditional
+969Lied
+913Requiem
+897Mbalax
+892Aguinaldo
+881Comfy Synth
+878Griot
+869Jersey Club
+867Memphis Rap
+850Zemer Ivri
+849Lento Violento
+849Toasting
+823Hard Beat
+822Beatbox
+818Phleng Phuea Chiwit
+813Prelude
+805Dances
+804Candombe
+781Madrigal
+759Fantasia
+759Thai Classical
+758Bambuco
+749Nerdcore Techno
+732Serial
+718Mugham
+716Champeta
+708Stride
+699Microhouse
+698Ballroom
+674Cantorial
+669Shaabi
+652Hypnagogic pop
+623Funaná
+613Cuatro
+597Gagaku
+597Skweee
+593Carimbó
+570Seresta
+565Sámi Music
+560Kizomba
+555Future Pop
+538Arabic Pop
+523Moombahton
+523Rhapsody
+522Occult
+519Philippine Classical
+517Bouncy Techno
+513Hyper Techno
+498Sonero
+497Funkot
+494Jug Band
+491Geet
+473Yemenite Jewish
+472Gwo Ka
+471Frevo
+460Woodwind Instrument
+458Te Deum
+452Wind Ensemble
+438Break-In
+426Midwest Emo
+426Progressive Bluegrass
+416Etude
+399Waiata
+393Lullaby
+392Anarcho-Punk
+381Cobla
+379Pagode
+377V-pop
+373Spiritual Jazz
+356Classical Guitar
+355Divertimento
+353Mouth Music
+342Taarab
+338Hill Country Blues
+336Euro Trance
+335Korean Court Music
+335Rune Singing
+327Bitpop
+326Junkanoo
+320Néo Kyma
+319Magnificat
+318Filk
+311Lowercase
+301Manila Sound
+290Synthpunk
+287Concerto Grosso
+277Cambodian Classical
+272Tamburitza
+271Piobaireachd
+258Low Bap
+255Nintendocore
+248Bubbling
+241Capriccio
+234Amapiano
+232Kuduro
+231Rapso
+224Guggenmusik
+223Nocturne
+221Gqom
+216Brass Instrument
+213Rōkyoku
+203Sean-nós
+202Neopagan
+194Incidental Music
+188Snap
+186Brega
+179Lao Music
+178Klasik
+177Zhongguo Feng
+174Duranguense
+163Bangladeshi Classical
+160Anatolian Rock
+158Neo-Classical Metal
+155Shibuya-Kei
+149Desert Blues
+149Minimalism
+138Għana
+135Bongo Flava
+131Antifolk
+129Program Music
+123Gnawa
+120Nagauta
+119Persian Pop
+118Currulao
+108Suomisaundi
+106Plainchant
+95Percussion Ensemble
+79Motswako
+71Bel Canto
+68Sport
+64Spaza
+55Brit Pop
+54Sokyoku
+53Azonto
+52Concert Band
+51Yoruba
+47Trallalero
+46Style Galant
+45Jiuta
+42Grand Opera
+41Baila
+37Shomyo
+35Byzantine
+34Crossover Thrash
+33Singeli
+32Dabke
+32Expressionist
+30Atonal
+29Honkyoku
+22Khaliji
+22Ojkača
+20Bećarac
+19Verismo
+17Sankyoku
+14Rara
+14Shinkyoku
+14Spectralism
+11Futurism
+11Shoegazer
+10Aleatoric
+10Singspiel
+7Bultrón
+6Formes Fixes
+6Microtonal
+3Gogo
+3Kaskawi
