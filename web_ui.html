@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Webcam Snapshot</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; padding: 16px; }
+    #video { border: 1px solid #ccc; max-width: 100%; }
+    #canvas { display:none; }
+    .controls { margin-top: 8px; }
+    button { padding: 8px 12px; font-size: 16px; }
+    #status { margin-top: 8px; color: #060; }
+  </style>
+</head>
+<body>
+  <h2>Webcam Snapshot</h2>
+  <video id="video" autoplay playsinline></video>
+  <canvas id="canvas"></canvas>
+
+  <div class="controls">
+    <button id="snap">Take snapshot</button>
+    <button id="download" disabled>Download last</button>
+  </div>
+
+  <div id="status"></div>
+  <h3>OCR Result</h3>
+  <pre id="ocr_output" style="white-space:pre-wrap; background:#f7f7f7; padding:8px; border:1px solid #eee; min-height:40px;"></pre>
+  <h3>CLIP Embedding (printed)</h3>
+  <pre id="clip_output" style="white-space:pre-wrap; background:#f7f7f7; padding:8px; border:1px solid #eee; min-height:40px; overflow:auto;"></pre>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snapBtn = document.getElementById('snap');
+    const downloadBtn = document.getElementById('download');
+    const status = document.getElementById('status');
+
+    let lastDataUrl = null;
+
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+        await video.play();
+      } catch (err) {
+        status.textContent = 'Error accessing camera: ' + err.message;
+        status.style.color = 'red';
+      }
+    }
+
+    function takeSnapshot() {
+      // set canvas size to video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+      lastDataUrl = dataUrl;
+      downloadBtn.disabled = false;
+      return dataUrl;
+    }
+
+    async function uploadSnapshot(dataUrl) {
+      status.textContent = 'Uploading...';
+      status.style.color = '#060';
+      try {
+        const res = await fetch('/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: dataUrl })
+        });
+        const j = await res.json();
+        if (res.ok) {
+          status.textContent = 'Saved snapshot: ' + j.filename;
+          status.style.color = '#060';
+          // show OCR and CLIP outputs if provided
+          const ocrOut = document.getElementById('ocr_output');
+          const clipOut = document.getElementById('clip_output');
+          ocrOut.textContent = j.ocr || '';
+          clipOut.textContent = j.clip || '';
+        } else {
+          status.textContent = 'Upload failed: ' + (j.error || res.statusText);
+          status.style.color = 'red';
+        }
+      } catch (err) {
+        status.textContent = 'Upload error: ' + err.message;
+        status.style.color = 'red';
+      }
+    }
+
+    snapBtn.addEventListener('click', async () => {
+      const dataUrl = takeSnapshot();
+      await uploadSnapshot(dataUrl);
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!lastDataUrl) return;
+      const a = document.createElement('a');
+      a.href = lastDataUrl;
+      a.download = 'snapshot.jpg';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    // Start camera on load
+    startCamera();
+  </script>
+</body>
+</html>
