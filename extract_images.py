@@ -23,132 +23,68 @@ import easyocr
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
-def add_clip_embeddings_to_csv(image_folder: str, metadata_filepath: str):
-    """
-    Generates CLIP embeddings for images in a folder and adds them
-    to a metadata CSV file, matching by filename (sans extension)
-    to the 'release_id' column.
-
-    Args:
-        image_folder (str): Path to the folder containing images.
-        metadata_filepath (str): Path to the 'releases_metadata.csv' file.
-    """
-    
-    print("Loading CLIP model...")
-    # Load the CLIP model
-    # Use GPU if available
+def batch_clip_embeddings_to_dataframe(folder_path):
+    # Load model and processor once
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    try:
-        model, preprocess = clip.load("ViT-B/32", device=device)
-        print(f"CLIP model loaded successfully on {device}.")
-    except Exception as e:
-        print(f"Error loading CLIP model: {e}")
-        print("Please ensure CLIP is installed: pip install git+https://github.com/openai/CLIP.git")
-        return
-
-    # Check if metadata file exists
-    if not os.path.exists(metadata_filepath):
-        print(f"Error: Metadata file not found at {metadata_filepath}")
-        return
-
-    # Check if image folder exists
-    if not os.path.isdir(image_folder):
-        print(f"Error: Image folder not found at {image_folder}")
-        return
-
-    print(f"Loading metadata from {metadata_filepath}...")
-    # Load the metadata CSV
-    try:
-        df = pd.read_csv(metadata_filepath)
-    except Exception as e:
-        print(f"Error reading CSV file: {e}")
-        return
-
-    # Ensure release_id column is string type for matching filenames
-    if 'release_id' not in df.columns:
-        print(f"Error: 'release_id' column not found in {metadata_filepath}")
-        return
-    df['release_id'] = df['release_id'].astype(str)
-
-    # Add 'clip_embedding' column if it doesn't exist
-    if 'clip_embedding' not in df.columns:
-        df['clip_embedding'] = pd.Series(dtype='object')
-        print("Added 'clip_embedding' column to DataFrame.")
-
+    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
+    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
     
-    print(f"Processing images in {image_folder}...")
-    processed_count = 0
-    not_found_count = 0
+    allowed_exts = {".png", ".jpg", ".jpeg", ".bmp"}
+    image_files = [f for f in os.listdir(folder_path) if os.path.splitext(f)[1].lower() in allowed_exts]
     
-    # Supported image extensions
-    image_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.gif'}
+    records = []
+    for fname in image_files:
+        img_path = os.path.join(folder_path, fname)
+        try:
+            image = Image.open(img_path).convert("RGB")
+            inputs = processor(images=image, return_tensors="pt").to(device)
+            with torch.no_grad():
+                embedding = model.get_image_features(**inputs)
+            embedding_np = embedding.cpu().numpy()[0]
+            embedding_np = embedding_np / np.linalg.norm(embedding_np)
+            record = {'filename': fname}
+            # Add each embedding dimension as a separate column (dim_0, dim_1, ..., dim_511)
+            for i, val in enumerate(embedding_np):
+                record[f'dim_{i}'] = val
+            records.append(record)
+        except Exception as e:
+            print(f"Error processing '{fname}': {e}")
+    
+    df = pd.DataFrame(records)
+    return df
 
-    # Iterate through files in the image folder
-    for filename in os.listdir(image_folder):
-        file_ext = os.path.splitext(filename)[1].lower()
-        
-        if file_ext in image_extensions:
-            # Extract release_id from filename (e.g., "123.jpg" -> "123")
-            release_id_str = os.path.splitext(filename)[0]
-            image_path = os.path.join(image_folder, filename)
+#clip embedding for an individual png
+def print_clip_embedding(image_path):
+    # Select device
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    # Load model and processor
+    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    model = model.to(device)
 
-            # Check if this release_id exists in the DataFrame
-            if release_id_str not in df['release_id'].values:
-                print(f"  - Skipping {filename}: No matching release_id '{release_id_str}' in CSV.")
-                not_found_count += 1
-                continue
-            
-            # Check if embedding already exists to avoid reprocessing
-            # Find the current embedding value for this release_id
-            current_embedding = df.loc[df['release_id'] == release_id_str, 'clip_embedding'].values[0]
-            if pd.notna(current_embedding):
-                print(f"  = Skipping {filename}: Embedding already exists.")
-                continue
+    # Load and preprocess image
+    image = Image.open(image_path).convert("RGB")
+    inputs = processor(images=image, return_tensors="pt").to(device)
 
-            try:
-                # Open, preprocess, and move image to device
-                image = Image.open(image_path)
-                image_input = preprocess(image).unsqueeze(0).to(device)
+    # Forward pass to get embedding
+    with torch.no_grad():
+        embedding = model.get_image_features(**inputs)
+    embedding_np = embedding.cpu().numpy()[0]
+    embedding_np = embedding_np / np.linalg.norm(embedding_np)  # Normalize
 
-                # Generate embedding
-                with torch.no_grad():
-                    image_features = model.encode_image(image_input)
-                
-                # Normalize features (standard practice for CLIP)
-                image_features /= image_features.norm(dim=-1, keepdim=True)
-                
-                # Convert embedding to a string representation of a list
-                # Detach from graph, move to CPU, convert to numpy, then list
-                embedding_list = image_features.cpu().numpy().flatten().tolist()
-                embedding_str = str(embedding_list) # Store as string
-                
-                # Update the DataFrame
-                # Use .loc to find the row(s) and set the value
-                df.loc[df['release_id'] == release_id_str, 'clip_embedding'] = embedding_str
-                print(f"  + Processed {filename} (release_id: {release_id_str})")
-                processed_count += 1
-
-            except Exception as e:
-                print(f"  - Error processing image {filename}: {e}")
-
-    # Save the updated DataFrame back to the CSV
-    try:
-        df.to_csv(metadata_filepath, index=False)
-        print(f"\nSuccessfully saved updated metadata to {metadata_filepath}")
-        print(f"Summary: {processed_count} new embeddings added/updated.")
-        if not_found_count > 0:
-            print(f"{not_found_count} images were skipped (no matching release_id).")
-    except Exception as e:
-        print(f"\nError saving updated CSV: {e}")
-
+    print(f"CLIP embedding for '{image_path}':")
+    print(embedding_np)
+    
 #rewrite this function to preprocess the image using OpenCV before passing it to pytesseract - not sure what transformations are done by easyocr?
 def ocr_with_easyocr(image_path, lang_list=['en']):
     reader = easyocr.Reader(lang_list, gpu=False)
     results = reader.readtext(image_path, detail=0)
     return ' '.join(results)
+
 def ocr_with_tesseract(image_path, lang='eng'):
     img = Image.open(image_path)
     return pytesseract.image_to_string(img, lang=lang)
+
 def batch_ocr(image_folder, output_csv="ocr_results.csv"):
     import pandas as pd
     results = []
@@ -349,18 +285,18 @@ if __name__ == "__main__":
 
     # file_path = "/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/.venv/include/vinyl-detection/styles.txt"
     # styles_df = clean_styles_data(file_path)
-    sample_df = pd.DataFrame({'style': ['Drum n Bass','Jazz', 'House']})
+    # sample_df = pd.DataFrame({'style': ['Drum n Bass','Jazz', 'House']})
 
-    #Extract releases metadata for all styles in the cleaned DataFrame
-    metadata_df = extract_metadata_by_styles(sample_df, max_results=20)
-    print(metadata_df.head())
+    # #Extract releases metadata for all styles in the cleaned DataFrame
+    # metadata_df = extract_metadata_by_styles(sample_df, max_results=20)
+    # print(metadata_df.head())
 
-    # Optionally, save the metadata to a CSV file
-    metadata_df.to_csv("releases_metadata.csv", index=False)
+    # # Optionally, save the metadata to a CSV file
+    # metadata_df.to_csv("releases_metadata.csv", index=False)
 
-    #extract album covers using the urls insid ethe releaes metadata file.
-    metadata_path = "/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/releases_metadata.csv"
-    download_album_covers(metadata_path, "covers")
+    # #extract album covers using the urls insid ethe releaes metadata file.
+    # metadata_path = "/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/releases_metadata.csv"
+    # download_album_covers(metadata_path, "covers")
 
     #perform batch ocr embedding, and pipe the embeddings to a new column in the metadata csv file.
     #pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.1/bin/tesseract'
@@ -368,4 +304,8 @@ if __name__ == "__main__":
     #perform batch clip embedding, and pipe the embeddings to a new column in the metadata csv file.
 
 
-    
+    #batch clip embedding
+    #print_clip_embedding("C:/cs/portfolio projects/vinyl-classification/covers/3960.jpg")
+    df = batch_clip_embeddings_to_dataframe("covers")
+    print(df.head())
+    print(len(df))
