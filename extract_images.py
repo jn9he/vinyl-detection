@@ -17,6 +17,10 @@ import numpy as np
 from transformers import CLIPProcessor, CLIPModel
 import clip
 
+import cv2
+from glob import glob
+import easyocr
+
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
 def add_clip_embeddings_to_csv(image_folder: str, metadata_filepath: str):
@@ -137,27 +141,40 @@ def add_clip_embeddings_to_csv(image_folder: str, metadata_filepath: str):
     except Exception as e:
         print(f"\nError saving updated CSV: {e}")
 
-
-def ocr_pytesseract(image_path):
+#rewrite this function to preprocess the image using OpenCV before passing it to pytesseract - not sure what transformations are done by easyocr?
+def ocr_with_easyocr(image_path, lang_list=['en']):
+    reader = easyocr.Reader(lang_list, gpu=False)
+    results = reader.readtext(image_path, detail=0)
+    return ' '.join(results)
+def ocr_with_tesseract(image_path, lang='eng'):
     img = Image.open(image_path)
-    text = pytesseract.image_to_string(img)
-    return text.strip()
-
-def batch_ocr_images(input_folder):
-    image_exts = {'.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.gif'}
-    image_files = [f for f in os.listdir(input_folder) 
-                   if os.path.splitext(f)[1].lower() in image_exts]
+    return pytesseract.image_to_string(img, lang=lang)
+def batch_ocr(image_folder, output_csv="ocr_results.csv"):
+    import pandas as pd
+    results = []
+    image_paths = glob(os.path.join(image_folder, '*.*g'))  # jpg, png, etc
     
-    for img_file in tqdm(image_files):
-        img_path = os.path.join(input_folder, img_file)
-        
-        print(f"\nImage: {img_file}")
-        
-        # Tesseract OCR
-        tess_text = ocr_pytesseract(img_path)
-        print("[PyTesseract OCR]:")
-        print(tess_text if tess_text else "No text found.")
-
+    # Uncomment only the engines you want to run:
+    # Set GOOGLE_APPLICATION_CREDENTIALS env variable for Google Vision
+    
+    for path in image_paths:
+        res = {'filename': os.path.basename(path)}
+        print(f"[Processing] {path}")
+        # EasyOCR
+        try:
+            res['easyocr'] = ocr_with_easyocr(path, lang_list=['en'])
+        except Exception as e:
+            print(f"EasyOCR failed for {path}: {e}")
+            res['easyocr'] = ''
+        results.append(res)
+        # Pytesseract
+        # try:
+        #     res['tesseract'] = ocr_with_tesseract(path, lang='eng')
+        # except Exception as e:
+        #     print(f"Tesseract failed for {path}: {e}")
+        #     res['tesseract'] = ''
+    pd.DataFrame(results).to_csv(output_csv, index=False)
+    print(f"OCR results saved to {output_csv}")
 
 def download_album_covers(metadata_path, output_dir="album_covers"):
     """
@@ -262,18 +279,22 @@ def get_releases_by_style(style, max_results=50):
             break
 
         for release in page_results:
+            # Prefer high quality cover image if available
+            cover_url = getattr(release, 'cover_image', None)
+            if not cover_url:
+                cover_url = getattr(release, 'thumb', None)  # fallback to thumbnail
+            
             data = {
                 'release_id': release.id,
-                'cover_url': getattr(release, 'thumb', None)  # thumb is usually the image URL
+                'cover_url': cover_url
             }
             releases.append(data)
             results_yielded += 1
             if results_yielded >= max_results:
                 break
-
         current_page += 1
-
     return releases
+
 
 def extract_metadata_by_styles(df, max_results=20):
     all_releases = []
@@ -326,12 +347,9 @@ if __name__ == "__main__":
     load_dotenv()
     d = create_discogs_client()
 
-    
-
-    file_path = "C:/cs/portfolio projects/vinyl-classification/.venv/Include/styles.txt"
-    styles_df = clean_styles_data(file_path)
+    # file_path = "/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/.venv/include/vinyl-detection/styles.txt"
+    # styles_df = clean_styles_data(file_path)
     sample_df = pd.DataFrame({'style': ['Drum n Bass','Jazz', 'House']})
-
 
     #Extract releases metadata for all styles in the cleaned DataFrame
     metadata_df = extract_metadata_by_styles(sample_df, max_results=20)
@@ -340,6 +358,14 @@ if __name__ == "__main__":
     # Optionally, save the metadata to a CSV file
     metadata_df.to_csv("releases_metadata.csv", index=False)
 
-
-    metadata_path = "C:/cs/portfolio projects/vinyl-classification/releases_metadata.csv"
+    #extract album covers using the urls insid ethe releaes metadata file.
+    metadata_path = "/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/releases_metadata.csv"
     download_album_covers(metadata_path, "covers")
+
+    #perform batch ocr embedding, and pipe the embeddings to a new column in the metadata csv file.
+    #pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.1/bin/tesseract'
+    #batch_ocr("/Users/joshnghe/Desktop/Code/personal/portfolio projects/vinyl-detection/covers")
+    #perform batch clip embedding, and pipe the embeddings to a new column in the metadata csv file.
+
+
+    
